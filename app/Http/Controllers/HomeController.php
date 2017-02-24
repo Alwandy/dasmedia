@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Categories; 
 use App\Subcategories; 
+use App\Videos; 
+
 
 class HomeController extends Controller
 {
@@ -30,7 +32,8 @@ class HomeController extends Controller
         return view('videos', compact('categories'));
 		} else {
 	    $subcategories = Subcategories::where('cat_id',$request->input('category'))->get();
-		return view('catvideos', compact('subcategories'));
+		$videos = Videos::leftJoin('subcategories', 'videos.sub_id', '=', 'subcategories.id')->select('videos.*')->get();
+		return view('catvideos', compact('subcategories', 'videos'));
 		}
     }	
 	

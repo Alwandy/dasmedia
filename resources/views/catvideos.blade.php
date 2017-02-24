@@ -32,7 +32,11 @@
 	 @foreach ($subcategories as $subcategory)
 	 <h2>{{ $subcategory->sub_name }}</a></h2>
 	 <p>{{ $subcategory->sub_desc}}</p>
-	 <p>{{ $subcategory->cat_id}}</p>
+	 @foreach ($videos as $video)
+	 @if ($video->sub_id ==$subcategory->id)
+	 <p>{{ $video->vid_name}} </p>
+	@endif
+			@endforeach		
 	 	@endforeach		
 	 </div>
 					                                            											
